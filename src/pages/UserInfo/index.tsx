@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react"
 import { GithubError, GithubUser, getUserByLogin } from "../../service"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { Header } from "../../components/Header"
 
 export const UserInfo = () => {
   const [userInfo, setUserInfo] = useState<null | GithubUser>(null)
   const [errorMessage, setErrorMessage] = useState<null | string>(null)
   const { login } = useParams()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const populateUser = async () => {
@@ -40,7 +41,7 @@ export const UserInfo = () => {
         <Header/>
         <div className='flex-grow flex items-center justify-center p-4'>
           <span className='text-3xl text-zinc-800'>
-            Usuário não encontrado
+            {errorMessage}
           </span>
         </div>
       </div>
@@ -91,6 +92,7 @@ export const UserInfo = () => {
               </span> : null}
           </div>
           <button
+            onClick={() => navigate(`/users/${login}/repos`)}
             className='bg-zinc-800 text-white w-full p-4 rounded-3xl font-bold'>
             Ver repositórios
           </button>
