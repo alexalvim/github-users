@@ -18,6 +18,7 @@ export interface GithubRepoListItem{
   stargazers_count: number
   name: string
   full_name: string
+  html_url: string
 }
 
 export interface GithubError{

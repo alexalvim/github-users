@@ -62,7 +62,7 @@ export const UserRepos = () => {
     <div className='flex-grow flex flex-col'>
       <Header/>
       <div className='flex-grow flex justify-center'>
-        <div className="flex flex-col items-center gap-6 p-8 rounded w-full max-w-lg">
+        <div className="flex flex-col items-center gap-6 p-8 rounded w-full max-w-2xl">
           <h2
             className='text-zinc-800 font-bold text-xl'>
             Repositórios de:
@@ -91,17 +91,25 @@ export const UserRepos = () => {
                   <li
                     key={repo.full_name}
                     className='px-2 py-8 border-solid border-zinc-200 border-b-2 flex items-center justify-between'>
-                    <Link
-                      className='text-zinc-800 text-base underline'
-                      to={`/repos/${repo.full_name}`}>
-                      {repo.name}
-                    </Link>
-                    <span className='text-base text-zinc-800 flex'>
-                      <span className='font-bold inline-block mr-2'>
-                        Estrelas:
+                    <div className='flex flex-col flex-grow gap-2'>
+                      <Link
+                        className='text-zinc-800 text-base underline'
+                        to={`/repos/${repo.full_name}`}>
+                        {repo.name}
+                      </Link>
+                      <span className='text-base text-zinc-800 flex'>
+                        <span className='font-bold inline-block mr-2'>
+                          Estrelas:
+                        </span>
+                        <span>{repo.stargazers_count}</span>
                       </span>
-                      <span>{repo.stargazers_count}</span>
-                    </span>
+                    </div>
+                    <a
+                      href={repo.html_url}
+                      target='_blank'
+                      className='bg-zinc-800 text-white p-4 rounded-3xl font-bold'>
+                      Ver no Github
+                    </a>
                   </li>
                 ))}
               </ul>
