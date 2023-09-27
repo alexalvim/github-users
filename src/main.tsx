@@ -9,6 +9,7 @@ import { Home } from './pages/Home/index.tsx';
 import { UserInfo } from './pages/UserInfo/index.tsx';
 import { UserRepos } from './pages/UserRepos/index.tsx';
 import { Repo } from './pages/Repo/index.tsx';
+import { NotFound } from './pages/NotFound/index.tsx';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
   {
     path: "/repos/:login/:repo",
     element: <Repo/>,
+  },
+  {
+    path: "/*",
+    element: <NotFound/>,
   },
 ]);
 

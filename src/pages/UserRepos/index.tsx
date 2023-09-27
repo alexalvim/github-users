@@ -75,7 +75,7 @@ export const UserRepos = () => {
           {repos.length > 0 ? (
             <>
               <div>
-                <span className='mr-2'>
+                <span className=' text-zinc-800 text-base mr-2'>
                   Ordenar por:
                 </span>
                 <select
