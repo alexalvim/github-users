@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
-import { GithubError, GithubRepo, getUserReposByLogin } from "../../service"
+import { GithubError, GithubRepoListItem, getUserReposByLogin } from "../../service"
 import { Link, useParams } from "react-router-dom"
 import { Header } from "../../components/Header"
 
-const sortRepos = (repos: GithubRepo[], sortOption: string) => {
+const sortRepos = (repos: GithubRepoListItem[], sortOption: string) => {
   switch (sortOption) {
     case 'asc':
       return repos.sort((repo1, repo2) => repo1.stargazers_count > repo2.stargazers_count ? 1 : -1)
@@ -14,36 +14,23 @@ const sortRepos = (repos: GithubRepo[], sortOption: string) => {
 }
 
 export const UserRepos = () => {
-  const [repos, setRepos] = useState<null | GithubRepo[]>(null)
+  const [repos, setRepos] = useState<null | GithubRepoListItem[]>(null)
   const [errorMessage, setErrorMessage] = useState<null | string>(null)
   const [sortOption, setSortOption] = useState<string>('desc');
   const { login } = useParams()
 
   useEffect(() => {
-    const populateUser = async () => {
+    const populateRepos = async () => {
       const responseRepos = await getUserReposByLogin(login || '')
       if((responseRepos as GithubError).message) {
         setErrorMessage('Usuário não encontrado')
       } else {
-        setRepos(responseRepos as GithubRepo[])
+        setRepos(responseRepos as GithubRepoListItem[])
       }
     }
 
-    populateUser()
+    populateRepos()
   }, [])
-
-  if(!repos) {
-    return (
-      <div className='flex-grow flex flex-col'>
-        <Header/>
-        <div className='flex-grow flex items-center justify-center p-4'>
-          <span className='text-3xl text-zinc-800'>
-            Carregando...
-          </span>
-        </div>
-      </div>
-    )
-  }
 
   if(errorMessage) {
     return (
@@ -52,6 +39,19 @@ export const UserRepos = () => {
         <div className='flex-grow flex items-center justify-center p-4'>
           <span className='text-3xl text-zinc-800'>
             {errorMessage}
+          </span>
+        </div>
+      </div>
+    )
+  }
+
+  if(!repos) {
+    return (
+      <div className='flex-grow flex flex-col'>
+        <Header/>
+        <div className='flex-grow flex items-center justify-center p-4'>
+          <span className='text-3xl text-zinc-800'>
+            Carregando...
           </span>
         </div>
       </div>
@@ -72,37 +72,45 @@ export const UserRepos = () => {
               {login}
             </Link>
           </h2>
-          <div>
-            <span className='mr-2'>
-              Ordenar por:
-            </span>
-            <select
-              className='border-solid border-zinc-200 border-2 rounded py-1 px-2'
-              value={sortOption}
-              onChange={(e) => { setSortOption(e.currentTarget.value) }}>
-              <option value='asc'>Crescente</option>
-              <option value='desc'>Decrescente</option>
-            </select>
-          </div>
-          <ul className='w-full flex flex-col'>
-            {sortRepos(repos, sortOption).map((repo) => (
-              <li
-                key={repo.full_name}
-                className='px-2 py-8 border-solid border-zinc-200 border-b-2 flex items-center justify-between'>
-                <Link
-                  className='text-zinc-800 text-base underline'
-                  to={`/repos/${repo.full_name}`}>
-                  {repo.name}
-                </Link>
-                <span className='text-base text-zinc-800 flex'>
-                  <span className='font-bold inline-block mr-2'>
-                    Estrelas:
-                  </span>
-                  <span>{repo.stargazers_count}</span>
+          {repos.length > 0 ? (
+            <>
+              <div>
+                <span className='mr-2'>
+                  Ordenar por:
                 </span>
-              </li>
-            ))}
-          </ul>
+                <select
+                  className='border-solid border-zinc-200 border-2 rounded py-1 px-2'
+                  value={sortOption}
+                  onChange={(e) => { setSortOption(e.currentTarget.value) }}>
+                  <option value='asc'>Crescente</option>
+                  <option value='desc'>Decrescente</option>
+                </select>
+              </div>
+              <ul className='w-full flex flex-col'>
+                {sortRepos(repos, sortOption).map((repo) => (
+                  <li
+                    key={repo.full_name}
+                    className='px-2 py-8 border-solid border-zinc-200 border-b-2 flex items-center justify-between'>
+                    <Link
+                      className='text-zinc-800 text-base underline'
+                      to={`/repos/${repo.full_name}`}>
+                      {repo.name}
+                    </Link>
+                    <span className='text-base text-zinc-800 flex'>
+                      <span className='font-bold inline-block mr-2'>
+                        Estrelas:
+                      </span>
+                      <span>{repo.stargazers_count}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : (
+            <span className='text-base text-zinc-800'>
+              Usuário sem repositórios
+            </span>
+          )}
         </div>
       </div>
     </div>

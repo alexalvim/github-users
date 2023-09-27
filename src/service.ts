@@ -6,7 +6,15 @@ export interface GithubUser{
   bio: string | null
 }
 
-export interface GithubRepo{
+export interface GithubRepo {
+  name: string
+  description: string
+  stargazers_count: number
+  language: string
+  html_url: string
+}
+
+export interface GithubRepoListItem{
   stargazers_count: number
   name: string
   full_name: string
@@ -22,8 +30,13 @@ export const getUserByLogin = async (name: string): Promise<GithubUser | GithubE
   return response
 }
 
-export const getUserReposByLogin = async (name: string): Promise<GithubRepo[] | GithubError> => {
+export const getUserReposByLogin = async (name: string): Promise<GithubRepoListItem[] | GithubError> => {
   const response = await fetch(`https://api.github.com/users/${name}/repos`).then((res) => res.json())
+  return response
+}
+
+export const getUserRepoByName = async (fullName: string): Promise<GithubRepo | GithubError> => {
+  const response = await fetch(`https://api.github.com/repos/${fullName}`).then((res) => res.json())
   return response
 }
 

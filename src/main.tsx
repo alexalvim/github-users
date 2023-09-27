@@ -24,7 +24,7 @@ const router = createBrowserRouter([
     element: <UserRepos/>,
   },
   {
-    path: "/repos/:name/:repo",
+    path: "/repos/:login/:repo",
     element: <Repo/>,
   },
 ]);

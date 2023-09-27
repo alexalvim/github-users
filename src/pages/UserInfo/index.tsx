@@ -22,19 +22,6 @@ export const UserInfo = () => {
     populateUser()
   }, [])
 
-  if(!userInfo) {
-    return (
-      <div className='flex-grow flex flex-col'>
-        <Header/>
-        <div className='flex-grow flex items-center justify-center p-4'>
-          <span className='text-3xl text-zinc-800'>
-            Carregando...
-          </span>
-        </div>
-      </div>
-    )
-  }
-
   if(errorMessage) {
     return (
       <div className='flex-grow flex flex-col'>
@@ -42,6 +29,19 @@ export const UserInfo = () => {
         <div className='flex-grow flex items-center justify-center p-4'>
           <span className='text-3xl text-zinc-800'>
             {errorMessage}
+          </span>
+        </div>
+      </div>
+    )
+  }
+
+  if(!userInfo) {
+    return (
+      <div className='flex-grow flex flex-col'>
+        <Header/>
+        <div className='flex-grow flex items-center justify-center p-4'>
+          <span className='text-3xl text-zinc-800'>
+            Carregando...
           </span>
         </div>
       </div>

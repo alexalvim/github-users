@@ -13,7 +13,7 @@ export const Home = () => {
 
   return (
     <div className='flex grow items-center justify-center'>
-      <div className='flex items-center justify-center gap-4 flex-col w-full max-w-md p-4'>
+      <div className='flex items-center justify-center gap-6 flex-col w-full max-w-md p-4'>
         <img
           src={githubLogo}
           className="w-40 h-40"
