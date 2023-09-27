@@ -18,11 +18,16 @@ export const Home = () => {
           src={githubLogo}
           className="w-40 h-40"
           alt="Github logo" />
-        <form className='w-full' onSubmit={handleSubmit}>
+        <form className='w-full flex flex-col gap-3 items-center' onSubmit={handleSubmit}>
           <Field
             value={searchedUser}
             setValue={(value) => setSearchedUser(value)}
             placeholder='Digite aqui o login a ser buscado'/>
+          <button
+            type='submit'
+            className='bg-zinc-800 text-white py-4 px-16 rounded-3xl font-bold'>
+            Buscar
+          </button>
         </form>
       </div>
     </div>
