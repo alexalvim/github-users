@@ -1,27 +1,27 @@
-# React + TypeScript + Vite
+# Github Users List
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+O projeto permite que o usuário pesquise por usuários e repositórios no Github, seguindo os seguintes requisitos:
 
-Currently, two official plugins are available:
+- Eu, como usuário, desejo buscar por um usuário do GitHub;
+- Eu, como usuário, desejo ver os detalhes do usuário buscado (número de
+seguidores, número de seguidos, imagem do avatar, e-mail e bio);
+- Eu, como usuário, desejo ver a listagem dos repositórios desse usuário
+que foi buscado, ordenados pelo número decrescente de estrelas;
+- Eu, como usuário, desejo poder alterar a ordem da listagem de repositórios;
+- Eu, como usuário, desejo ver uma página com os detalhes de um
+repositório (nome, descrição, número de estrelas, linguagem e um link
+externo para a página do repositório no GitHub), que pode ser clicado na
+listagem dos repositórios;
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Passo a passo para rodar o projeto
 
-## Expanding the ESLint configuration
+1. Clone o repositório na sua maquina.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+2. Entre no diretório do projeto.
 
-- Configure the top-level `parserOptions` property like this:
+3. Rode o comando `pnpm i` para instalar as dependencias.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+4. Rode o comando `pnpm run dev` para rodar o projeto na porta 5173
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+5. Acesse o projeto na url `localhost:5173`
+
