@@ -92,7 +92,7 @@ export const Repo = () => {
           <a
             href={currentRepo.html_url}
             target='_blank'
-            className='bg-zinc-800 text-white w-full p-4 rounded-3xl font-bold'>
+            className='bg-zinc-800 text-white p-4 rounded-3xl font-bold text-center'>
             Ver repositório no Github
           </a>
         </div>
